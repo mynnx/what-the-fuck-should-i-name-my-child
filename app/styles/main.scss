@@ -2,6 +2,24 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
+#container {
+    text-transform: uppercase;
+    font-size: x-large;
+    text-align: center;
+}
+
+#container .male {
+    color: #52A1B2;
+}
+
+#container .female {
+    color: #FF5CA9;
+}
+
+#container .neutral {
+    color: #FF8536;
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
