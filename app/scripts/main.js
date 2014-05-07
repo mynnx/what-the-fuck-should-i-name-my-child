@@ -30,9 +30,10 @@ require.config({
 require([
     'backbone',
     'mixins/backboneClose',
-    'viewController',
+    'views/appView',
     'router'
-], function (Backbone, _, ViewController, Router) {
-    var router = new Router();
-    ViewController.init();
+], function (Backbone, _, AppView, Router) {
+    var appView = new AppView(),
+        router = new Router({'appView': appView});
+    Backbone.history.start();
 });

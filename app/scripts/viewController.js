@@ -7,38 +7,38 @@ define([
     'use strict';
     var genderSelectView, lastNameSelectView;
 
-    var init = function () {
-        Backbone.history.start();
-    };
+    var appView = Backbone.View.extend({
+        el: '#container',
 
-    var displayLanding = function () {
-        genderSelectView = new GenderSelectView();
-        genderSelectView.on('genderSelected', this.askForLastName, this);
-    };
+        render: function () {
+            this.$el.html('');
+        },
 
-    var askForLastName = function (gender) {
-        lastNameSelectView = new LastNameSelectView();
-        lastNameSelectView.on('lastNameSelected', this.showName(gender), this);
-        lastNameSelectView.setElement('#nameSelect').render();
-    };
-    
-    var showName = function (gender) {
-        return function (name) {
-            lastNameSelectView.close();
-            genderSelectView.close();
-            nameView = new NameView({
-                'name': name,
-                'gender': gender
-            });
-        };
-    };
+        displayLanding: function () {
+            genderSelectView = new GenderSelectView();
+            genderSelectView.on('genderSelected', this.askForLastName, this);
+            this.$el.append(genderSelectView.render().el);
+        },
+
+        askForLastName: function (gender) {
+            lastNameSelectView = new LastNameSelectView();
+            lastNameSelectView.on('lastNameSelected', this.showName(gender), this);
+            lastNameSelectView.setElement('#nameSelect').render();
+        },
+        
+        showName: function (gender) {
+            return function (name) {
+                lastNameSelectView.close();
+                genderSelectView.close();
+                nameView = new NameView({
+                    'name': name,
+                    'gender': gender
+                });
+            };
+        }
+    });
         
 
-    return {
-        'init': init,
-        'askForLastName': askForLastName,
-        'displayLanding': displayLanding,
-        'showName': showName
-    };
+    return appView;
 });
 

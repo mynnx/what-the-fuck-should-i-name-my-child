@@ -16,7 +16,7 @@ define([
 
         template: JST['app/scripts/templates/nameView.ejs'],
 
-        el: '#container2',
+        tagName: 'div',
 
         initialize : function (options) {
             this.options = options || {};
@@ -43,6 +43,8 @@ define([
                 'lastName': this.options.name,
                 'gender': this.options.gender
             }));
+
+            return this;
         },
 
         giveMeAnother: function() {

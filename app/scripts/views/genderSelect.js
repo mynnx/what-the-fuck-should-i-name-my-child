@@ -10,19 +10,16 @@ define([
 
     var GenderSelectView = Backbone.View.extend({
         events: {
-            'click .btn': 'selectedGender'
+            'click .choice': 'selectedGender'
         },
 
         template: JST['app/scripts/templates/genderSelect.ejs'],
 
-        el: '#container',
-
-        initialize: function () {
-            this.render();
-        },
+        tagName: 'div',
 
         render: function () {
             this.$el.html(this.template({}));
+            return this;
         },
 
         selectedGender: function(e) {

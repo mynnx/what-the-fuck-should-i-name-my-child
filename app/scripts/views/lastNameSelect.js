@@ -15,11 +15,11 @@ define([
 
         template: JST['app/scripts/templates/lastNameSelect.ejs'],
 
-        initialize: function () {
-        },
+        tagName: 'div',
 
         render: function () {
             this.$el.html(this.template({}));
+            return this;
         },
 
         nameChosen: function () {
