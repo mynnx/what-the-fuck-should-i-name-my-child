@@ -23,10 +23,6 @@ define([
         },
 
         render: function () {
-            function randomInArray (array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
-
             function weightedRandom (fixture) {
                 var randomNumber = Math.floor(Math.random() * fixture.total);
                 return _.find(fixture.names, function(el) {
@@ -41,7 +37,7 @@ define([
             } else if (this.options.gender === 'boy-btn') {
                 firstName = weightedRandom(fixtures.male);
             } else {
-                firstName = randomInArray(['Pat', 'Mark', 'Sunshine']);
+                firstName = weightedRandom(fixtures.ambiguous);
             }
 
             this.$el.html(this.template({

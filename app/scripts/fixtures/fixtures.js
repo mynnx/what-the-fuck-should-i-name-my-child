@@ -3,12 +3,14 @@
 
 define([
     'text!fixtures/male.json',
-    'text!fixtures/female.json'
-], function (maleFile, femaleFile) {
+    'text!fixtures/female.json',
+    'text!fixtures/ambiguous.json'
+], function (maleFile, femaleFile, ambiguousFile) {
     'use strict';
 
     var maleNames = JSON.parse(maleFile),
-        femaleNames = JSON.parse(femaleFile);
+        femaleNames = JSON.parse(femaleFile),
+        ambiguousNames = JSON.parse(ambiguousFile);
 
     return {
         male: {
@@ -18,6 +20,10 @@ define([
         female: {
             'total': femaleNames.total,
             'names': femaleNames.names
+        },
+        ambiguous: {
+            'total': ambiguousNames.total,
+            'names': ambiguousNames.names
         }
     };
 });
