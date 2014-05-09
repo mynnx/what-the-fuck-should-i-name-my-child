@@ -20,20 +20,26 @@ define([
 
         initialize : function (options) {
             this.options = options || {};
-            this.render();
         },
 
         render: function () {
             function randomInArray (array) {
-                return array[Math.floor(Math.random() * array.length)]
+                return array[Math.floor(Math.random() * array.length)];
+            }
+
+            function weightedRandom (fixture) {
+                var randomNumber = Math.floor(Math.random() * fixture.total);
+                return _.find(fixture.names, function(el) {
+                    return randomNumber < el[1];
+                })[0];
             }
 
             var firstName;
 
             if (this.options.gender === 'girl-btn') {
-                firstName = randomInArray(fixtures.femaleNames);
+                firstName = weightedRandom(fixtures.female);
             } else if (this.options.gender === 'boy-btn') {
-                firstName = randomInArray(fixtures.maleNames);
+                firstName = weightedRandom(fixtures.male);
             } else {
                 firstName = randomInArray(['Pat', 'Mark', 'Sunshine']);
             }
