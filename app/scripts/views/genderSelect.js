@@ -27,7 +27,7 @@ define([
 
             ['boy-btn', 'girl-btn', 'fff-btn'].forEach(function (id) {
                 if (id !== e.target.id) {
-                    $('#' + id).hide(5);
+                    $('#' + id).hide();
                 } else {
                     chosenGender = id;
                 }
