@@ -5,7 +5,7 @@ define([
     'views/nameView'
 ], function (Backbone, GenderSelectView, LastNameSelectView, NameView) {
     'use strict';
-    var genderSelectView, lastNameSelectView;
+    var genderSelectView, lastNameSelectView, nameView;
 
     var appView = Backbone.View.extend({
         el: '#container',
@@ -23,7 +23,8 @@ define([
         askForLastName: function (gender) {
             lastNameSelectView = new LastNameSelectView();
             lastNameSelectView.on('lastNameSelected', this.showName(gender), this);
-            lastNameSelectView.setElement('#nameSelect').render();
+            this.$el.append(lastNameSelectView.render().el);
+            lastNameSelectView.$('#lastNameForm :text').focus();
         },
         
         showName: function (gender) {
@@ -34,6 +35,8 @@ define([
                     'name': name,
                     'gender': gender
                 });
+
+                this.$el.append(nameView.render().el);
             };
         }
     });
