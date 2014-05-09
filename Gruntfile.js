@@ -27,6 +27,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         yeoman: yeomanConfig,
+        aws: grunt.file.readJSON('aws-keys.json'),
         watch: {
             options: {
                 nospawn: true,
@@ -271,6 +272,24 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        aws_s3: {
+          options: {
+            accessKeyId: '<%= aws.AWSAccessKeyId %>', // Use the variables
+            secretAccessKey: '<%= aws.AWSSecretKey %>', // You can also use env variables
+            uploadConcurrency: 5, // 5 simultaneous uploads
+            downloadConcurrency: 5 // 5 simultaneous downloads
+          },
+          staging: {
+            options: {
+              bucket: 'whatthefuckshouldinamemychild.com',
+              differential: true // Only uploads the files that have changed
+            },
+            files: [
+              {dest: '/', cwd: 'dist/', action: 'delete'},
+              {expand: true, cwd: 'dist/', src:['**'], dest: ''}
+            ]
+          }
         }
     });
 
@@ -354,4 +373,9 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('deploy', [
+        'build',
+        'aws_s3'
+      ]);
 };
