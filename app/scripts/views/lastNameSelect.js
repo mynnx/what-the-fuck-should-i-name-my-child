@@ -10,7 +10,7 @@ define([
 
     var LastNameSelectView = Backbone.View.extend({
         events: {
-            'click :submit': 'nameChosen'
+            'submit #lastNameForm': 'nameChosen'
         },
 
         template: JST['app/scripts/templates/lastNameSelect.ejs'],
@@ -22,9 +22,11 @@ define([
             return this;
         },
 
-        nameChosen: function () {
-            var name = $('#lastNameInput').val();
-            this.trigger('lastNameSelected', name);
+        nameChosen: function (e) {
+            var name = this.$('#lastNameForm :text').val(),
+                errorMessage;
+                this.trigger('lastNameSelected', name);
+            e.preventDefault();
         }
     });
 
