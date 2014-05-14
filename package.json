@@ -27,7 +27,7 @@
     "time-grunt": "~0.2.8",
     "jshint-stylish": "~0.1.5",
     "grunt-aws-s3": "~0.8.5",
-    "grunt-contrib-compress": "~0.8.0",
+    "grunt-contrib-compress": "~0.8.0"
   },
   "engines": {
     "node": ">=0.10.0"
