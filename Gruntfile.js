@@ -111,7 +111,12 @@ module.exports = function (grunt) {
         },
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
-            server: '.tmp'
+            server: '.tmp',
+            jsgz: {
+              cwd: '<%= yeoman.dist %>',
+              src: ['**/*.js.gz'],
+              expand: true,
+            }
         },
         jshint: {
             options: {
@@ -243,6 +248,14 @@ module.exports = function (grunt) {
                         'bower_components/sass-bootstrap/fonts/*.*'
                     ]
                 }]
+            },
+            jsgz: {
+              cwd: '<%= yeoman.dist %>',
+              src: ['**/*.js.gz'],
+              dest: '<%= yeoman.dist %>',
+              expand: true,
+              ext: '',
+              extDot: 'last'
             }
         },
         bower: {
@@ -287,8 +300,20 @@ module.exports = function (grunt) {
             },
             files: [
               {dest: '/', cwd: 'dist/', action: 'delete'},
-              {expand: true, cwd: 'dist/', src:['**'], dest: ''}
+              {expand: true, cwd: 'dist/', src:['**/*.js'], dest: '', params: { ContentEncoding: 'gzip' }},
+              {expand: true, cwd: 'dist/', src:['**', '!**/*.js'], dest: ''}
             ]
+          }
+        },
+        compress: {
+          main: {
+            options: {
+              mode: 'gzip'
+            },
+            expand: true,
+            cwd: '<%= yeoman.dist %>/',
+            src: ['**/*.js'],
+            dest: '<%= yeoman.dist %>/'
           }
         }
     });
@@ -363,9 +388,12 @@ module.exports = function (grunt) {
         'concat',
         'cssmin',
         'uglify',
-        'copy',
+        'copy:dist',
         'rev',
-        'usemin'
+        'compress',
+        'usemin',
+        'copy:jsgz',
+        'clean:jsgz'
     ]);
 
     grunt.registerTask('default', [
