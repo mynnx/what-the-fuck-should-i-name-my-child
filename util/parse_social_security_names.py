@@ -30,5 +30,5 @@ if __name__ == '__main__':
     male_names, female_names = parse_names(sys.argv[1])
     for out_file, obj in (('male.json', male_names), ('female.json', female_names)):
         with open(out_file, 'w+') as f:
-            json.dump(obj, f, indent=4)
+            json.dump(obj, f)
             f.close()

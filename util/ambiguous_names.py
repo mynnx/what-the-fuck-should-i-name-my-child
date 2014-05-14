@@ -54,6 +54,6 @@ def parse_names(file_name):
 if __name__ == '__main__':
     ambiguous_names = parse_names(sys.argv[1])
     with open('ambiguous.json', 'w+') as f:
-        json.dump(ambiguous_names, f, indent=4)
+        json.dump(ambiguous_names, f)
         f.close()
 
