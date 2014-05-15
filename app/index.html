@@ -18,15 +18,28 @@
         <!-- endbuild -->
     </head>
     <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=631721073572524&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
 
     <div class="row">
-        <div id="container" class="col-md-8 col-md-offset-2">
+        <div id="container" class="col-md-8 col-md-offset-2"> </div>
+        <div class="col-md-2 col-xs-12 social-buttons">
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwhatthefuckshouldimakefordinner.com%2F&amp;width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=80&amp;appId=631721073572524" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px; width: 95px" allowTransparency="true"></iframe>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mynnx&repo=what-the-fuck-should-i-name-my-child&type=watch"
+              allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
         </div>
     </div>
+
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
