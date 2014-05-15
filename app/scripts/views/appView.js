@@ -2,22 +2,22 @@ define([
     'backbone',
     'views/genderSelect',
     'views/lastNameSelect',
-    'views/nameView'
-], function (Backbone, GenderSelectView, LastNameSelectView, NameView) {
+    'views/nameView',
+    'templates'
+], function (Backbone, GenderSelectView, LastNameSelectView, NameView, JST) {
     'use strict';
     var genderSelectView, lastNameSelectView, nameView;
 
     var appView = Backbone.View.extend({
         el: '#container',
 
-        render: function () {
-            this.$el.html('');
-        },
+        socialTemplate: JST['app/scripts/templates/socialButtons.ejs'],
 
         displayLanding: function () {
             genderSelectView = new GenderSelectView();
             genderSelectView.on('genderSelected', this.askForLastName, this);
             this.$el.append(genderSelectView.render().el);
+            $('#socialButtons').html(this.socialTemplate({}));
         },
 
         askForLastName: function (gender) {
