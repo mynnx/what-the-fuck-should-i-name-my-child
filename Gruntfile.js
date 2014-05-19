@@ -165,7 +165,10 @@ module.exports = function (grunt) {
                         'templates': '../../.tmp/scripts/templates',
                         'jquery': '../../app/bower_components/jquery/dist/jquery',
                         'underscore': '../../app/bower_components/underscore/underscore',
-                        'backbone': '../../app/bower_components/backbone/backbone'
+                        'backbone': '../../app/bower_components/backbone/backbone',
+                        'bootstrap': '../bower_components/sass-bootstrap/dist/js/bootstrap',
+                        'text' : '../bower_components/requirejs-text/text',
+                        'ga': 'empty:'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -245,7 +248,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'bower_components/sass-bootstrap/fonts/*.*',
+                        'scripts/vendor/*.js'
                     ]
                 }]
             },
@@ -278,6 +282,7 @@ module.exports = function (grunt) {
                 files: {
                     src: [
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
+                        '!<%= yeoman.dist %>/scripts/vendor/analytics.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                         '/styles/fonts/{,*/}*.*',

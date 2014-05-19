@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'ga',
     'templates'
-], function ($, _, Backbone, JST) {
+], function ($, _, Backbone, ga, JST) {
     'use strict';
 
     var LastNameSelectView = Backbone.View.extend({
@@ -37,6 +38,7 @@ define([
                     this.$('#lastNameForm').append('<p class="error">' + errorMessage + '</p>');
                 }
             } else {
+                ga('send', 'event', 'progress', 'nameChosen', name);
                 this.trigger('lastNameSelected', name);
             }
             e.preventDefault();

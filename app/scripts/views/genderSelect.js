@@ -4,8 +4,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'ga',
     'templates'
-], function ($, _, Backbone, JST) {
+], function ($, _, Backbone, ga, JST) {
     'use strict';
 
     var GenderSelectView = Backbone.View.extend({
@@ -32,6 +33,7 @@ define([
                     chosenGender = id;
                 }
             });
+            ga('send', 'event', 'progress', 'gender', chosenGender);
             this.trigger('genderSelected', chosenGender);
         }
     });

@@ -16,6 +16,9 @@ require.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'jquery'
+        },
+        ga: {
+            exports: 'ga'
         }
     },
     paths: {
@@ -23,7 +26,9 @@ require.config({
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
-        text : '../bower_components/requirejs-text/text'
+        text : '../bower_components/requirejs-text/text',
+        ga: ['//www.google-analytics.com/analytics',
+             'vendor/analytics']
     }
 });
 

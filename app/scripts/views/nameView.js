@@ -5,14 +5,17 @@ define([
     'underscore',
     'backbone',
     'templates',
+    'ga',
     'fixtures/fixtures'
-], function ($, _, Backbone, JST, fixtures) {
+], function ($, _, Backbone, JST, ga, fixtures) {
     'use strict';
 
     var nameView = Backbone.View.extend({
         events: {
             'click #giveMeAnother': 'giveMeAnother'
         },
+
+        namesDisplayed: 0,
 
         template: JST['app/scripts/templates/nameView.ejs'],
 
@@ -50,6 +53,8 @@ define([
         },
 
         giveMeAnother: function() {
+            this.namesDisplayed++;
+            ga('send', 'event', 'progress', 'name', 'new', this.namesDisplayed);
             this.render();
         }
 

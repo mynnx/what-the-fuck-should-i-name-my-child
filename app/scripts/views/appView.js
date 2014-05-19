@@ -3,8 +3,9 @@ define([
     'views/genderSelect',
     'views/lastNameSelect',
     'views/nameView',
-    'templates'
-], function (Backbone, GenderSelectView, LastNameSelectView, NameView, JST) {
+    'templates',
+    'ga'
+], function (Backbone, GenderSelectView, LastNameSelectView, NameView, JST, ga) {
     'use strict';
     var genderSelectView, lastNameSelectView, nameView;
 

@@ -1,6 +1,9 @@
+/*global define*/
+
 define([
     'backbone',
-], function (Backbone) {
+    'analytics'
+], function (Backbone, Analytics) {
     'use strict';
 
     var childRouter = Backbone.Router.extend({
@@ -14,6 +17,7 @@ define([
         },
 
         defaultRoute: function () {
+            Analytics.sendPageView();
             this.appView.displayLanding();
         },
 
