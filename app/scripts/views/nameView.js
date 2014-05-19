@@ -26,27 +26,27 @@ define([
         },
 
         render: function () {
-            function weightedRandom (fixture) {
-                var randomNumber = Math.floor(Math.random() * fixture.total);
-                return _.find(fixture.names, function(el) {
+            function weightedRandom (total, list) {
+                var randomNumber = Math.floor(Math.random() * total);
+                return _.find(list, function(el) {
                     return randomNumber < el[1];
                 })[0];
             }
 
-            var firstName;
-
+            var fixture;
             if (this.options.gender === 'girl-btn') {
-                firstName = weightedRandom(fixtures.female);
+                fixture = fixtures.female;
             } else if (this.options.gender === 'boy-btn') {
-                firstName = weightedRandom(fixtures.male);
+                fixture = fixtures.male;
             } else {
-                firstName = weightedRandom(fixtures.ambiguous);
+                fixture = fixtures.ambiguous;
             }
 
             this.$el.html(this.template({
-                'firstName': firstName,
+                'firstName': weightedRandom(fixture.total, fixture.names),
                 'lastName': this.options.name,
-                'gender': this.options.gender
+                'quote': weightedRandom(fixtures.nameQuotes.total,
+                                        fixtures.nameQuotes.quotes)
             }));
 
             return this;
