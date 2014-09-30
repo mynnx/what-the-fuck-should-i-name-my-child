@@ -1,9 +1,9 @@
 THIS IS A HANDY TOOL TO HELP YOU, A LAZY BASTARD, NAME YOUR KID.
 
 
-Blog post: http://blog.mynnx.com/2014/08/07/introduction/
+**Blog post**: http://blog.mynnx.com/2014/08/07/introduction/
 
-Deployed at: http://whatthefuckshouldinamemychild.com/
+**Deployed at**: http://whatthefuckshouldinamemychild.com/
 
 Run it yourself:
 
