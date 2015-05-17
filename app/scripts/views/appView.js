@@ -7,41 +7,47 @@ define([
     'ga'
 ], function (Backbone, GenderSelectView, LastNameSelectView, NameView, JST, ga) {
     'use strict';
-    var genderSelectView, lastNameSelectView, nameView;
 
     var appView = Backbone.View.extend({
         el: '#container',
 
         socialTemplate: JST['app/scripts/templates/socialButtons.ejs'],
 
-        displayLanding: function () {
-            genderSelectView = new GenderSelectView();
-            genderSelectView.on('genderSelected', this.askForLastName, this);
-            this.$el.append(genderSelectView.render().el);
+        setCurrentView: function (view) {
+            if (this.currentView) {
+                this.currentView.close();
+            }
+            this.currentView = view;
+        },
+
+        initialize: function (view) {
             $('#socialButtons').html(this.socialTemplate({}));
         },
 
+        askForGender: function () {
+            var genderSelectView = new GenderSelectView();
+            this.setCurrentView(genderSelectView);
+            this.$el.append(genderSelectView.render().el);
+        },
+
         askForLastName: function (gender) {
-            lastNameSelectView = new LastNameSelectView();
-            lastNameSelectView.on('lastNameSelected', this.showName(gender), this);
+            var lastNameSelectView = new LastNameSelectView({gender: gender});
+            this.setCurrentView(lastNameSelectView);
+
             this.$el.append(lastNameSelectView.render().el);
             lastNameSelectView.$('#lastNameForm :text').focus();
         },
-        
-        showName: function (gender) {
-            return function (name) {
-                lastNameSelectView.close();
-                genderSelectView.close();
-                nameView = new NameView({
-                    'name': name,
-                    'gender': gender
-                });
 
-                this.$el.append(nameView.render().el);
-            };
+        showName: function (gender, lastName) {
+            var nameView = new NameView({
+                'name': lastName,
+                'gender': gender
+            });
+            this.setCurrentView(nameView);
+            this.$el.append(nameView.render().el);
         }
     });
-        
+
 
     return appView;
 });

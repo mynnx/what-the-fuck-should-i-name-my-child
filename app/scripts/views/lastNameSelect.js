@@ -10,36 +10,32 @@ define([
     'use strict';
 
     var LastNameSelectView = Backbone.View.extend({
-        errorMessages: [
-            'really?  fucking choose a last name already',
-            'is your cat stepping on your laptop?  choose a last name!'
-        ],
-
         events: {
             'submit #lastNameForm': 'nameChosen'
         },
 
         template: JST['app/scripts/templates/lastNameSelect.ejs'],
 
+        initialize: function (options) {
+            this.options = options || {};
+        },
+
         tagName: 'div',
 
         render: function () {
-            this.$el.html(this.template({}));
+            this.$el.html(this.template({
+                gender: this.options.gender
+            }));
             return this;
         },
 
         nameChosen: function (e) {
-            var name = this.$('#lastNameForm :text').val(),
-                errorMessage;
-            if (name === '') {
-                this.$('#lastNameForm').addClass('has-error');
-                errorMessage = this.errorMessages.shift();
-                if (errorMessage) {
-                    this.$('#lastNameForm').append('<p class="error">' + errorMessage + '</p>');
-                }
-            } else {
+            var name = this.$('#lastNameForm :text').val();
+            if (name !== '') {
                 ga('send', 'event', 'progress', 'nameChosen', name);
-                this.trigger('lastNameSelected', name);
+                Backbone.history.navigate(
+                    this.options.gender + '/' +
+                    name, true);
             }
             e.preventDefault();
         }
