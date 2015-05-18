@@ -36,9 +36,14 @@ require([
     'backbone',
     'mixins/backboneClose',
     'views/appView',
-    'router'
-], function (Backbone, _, AppView, Router) {
+    'router',
+    'analytics'
+], function (Backbone, _, AppView, Router, Analytics) {
     var appView = new AppView(),
         router = new Router({'appView': appView});
+
+    // Wire GA to the router: https://gist.github.com/daveaugustine/1771986
+    Backbone.history.on("route", Analytics.sendPageView)
+
     Backbone.history.start();
 });
