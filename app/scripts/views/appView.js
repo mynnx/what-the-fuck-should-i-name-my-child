@@ -38,10 +38,11 @@ define([
             lastNameSelectView.$('#lastNameForm :text').focus();
         },
 
-        showName: function (gender, lastName) {
+        showName: function (gender, lastName, index) {
             var nameView = new NameView({
                 'name': lastName,
-                'gender': gender
+                'gender': gender,
+                'index': index
             });
             this.setCurrentView(nameView);
             this.$el.append(nameView.render().el);

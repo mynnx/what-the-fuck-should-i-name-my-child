@@ -14,11 +14,11 @@ define([
         routes: {
             '': 'defaultRoute',
             ':gender': 'lastNameRoute',
-            ':gender/:lastName': 'nameSuggestRoute'
+            ':gender/:lastName/suggest': 'nameSuggestRoute',
+            ':gender/:lastname/:hash': 'nameDirectRoute'
         },
 
         defaultRoute: function () {
-            Analytics.sendPageView();
             this.appView.askForGender();
         },
 
@@ -30,6 +30,9 @@ define([
             this.appView.showName(gender, lastName);
         },
 
+        nameDirectRoute: function (gender, lastName, index) {
+            this.appView.showName(gender, lastName, index);
+        },
 
     });
 

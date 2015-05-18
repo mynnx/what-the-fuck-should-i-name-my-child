@@ -32,10 +32,9 @@ define([
         nameChosen: function (e) {
             var name = this.$('#lastNameForm :text').val();
             if (name !== '') {
-                ga('send', 'event', 'progress', 'nameChosen', name);
                 Backbone.history.navigate(
                     this.options.gender + '/' +
-                    name, true);
+                    name + '/suggest', true);
             }
             e.preventDefault();
         }
