@@ -40,7 +40,7 @@ define([
 
         showName: function (gender, lastName, index) {
             var nameView = new NameView({
-                'name': lastName,
+                'lastName': lastName,
                 'gender': gender,
                 'index': index
             });

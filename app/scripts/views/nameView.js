@@ -12,7 +12,8 @@ define([
 
     var nameView = Backbone.View.extend({
         events: {
-            'click #giveMeAnother': 'giveMeAnother'
+            'click #giveMeAnother': 'giveMeAnother',
+            'click #share': 'share'
         },
 
         namesDisplayed: 0,
@@ -52,17 +53,20 @@ define([
             fixture = this.getFixture();
 
             if (this.options.index) {
-                nameToDisplay = fixture.names[this.options.index][0];
+                this.options.firstName = fixture.names[this.options.index][0];
             } else {
                 foundName = this.weightedRandom(fixture.total, fixture.names);
-                nameToDisplay = foundName['item'];
-                Backbone.history.navigate(this.options.gender + '/' + this.options.name
-                                            + '/' + foundName['index']);
+                this.options.index = foundName['index'];
+                this.options.firstName = foundName['item'];
+                Backbone.history.navigate(this.options.gender + '/' + this.options.lastName
+                                            + '/' + this.options.index);
             }
 
             this.$el.html(this.template({
-                'firstName': nameToDisplay,
-                'lastName': this.options.name,
+                'firstName': this.options.firstName,
+                'lastName': this.options.lastName,
+                'gender': this.options.gender,
+                'index': this.options.index,
                 'quote': this.weightedRandom(fixtures.nameQuotes.total,
                                         fixtures.nameQuotes.quotes)['item']
             }));
@@ -70,9 +74,26 @@ define([
             return this;
         },
 
+
+        share: function(e) {
+             var share_url = "http://whatthefuckshouldinamemychild.com/?utm_source=facebook&utm_medium=share&utm_campaign=ithink#"
+                + this.options.gender + "/" + this.options.lastName + "/" + this.options.index;
+             var name = '"' + this.options.firstName.toUpperCase() + " "
+                + this.options.lastName.toUpperCase() + '"';
+
+             FB.ui({
+                 app_id: '631721073572524',
+                 method: 'feed',
+                 link: share_url,
+                 caption: "Should I name my kid " + this.options.firstName + "?",
+                 name: name,
+             }, function(response){
+                 ga('send', 'social', 'facebook', 'share', share_url);
+             });
+             e.preventDefault();
+        },
+
         giveMeAnother: function() {
-            this.namesDisplayed++;
-            ga('send', 'event', 'Interaction', 'Name Given', this.options.gender);
             this.options.index = undefined;
             this.render();
         }
