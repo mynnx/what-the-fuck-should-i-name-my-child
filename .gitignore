@@ -1,5 +1,10 @@
 # Created by http://gitignore.io
 
+### WTFSSINMC ###
+promotion/
+app/scripts/vendor
+
+
 ### Node ###
 lib-cov
 *.seed
