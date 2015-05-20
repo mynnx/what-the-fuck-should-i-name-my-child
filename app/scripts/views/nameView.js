@@ -55,6 +55,7 @@ define([
             if (this.options.index) {
                 this.options.firstName = fixture.names[this.options.index][0];
             } else {
+                this.sendAnalytics(this.options.lastName);
                 foundName = this.weightedRandom(fixture.total, fixture.names);
                 this.options.index = foundName['index'];
                 this.options.firstName = foundName['item'];
@@ -74,6 +75,10 @@ define([
             return this;
         },
 
+        sendAnalytics: function(lastName) {
+            ga('send', 'event', 'Interaction', 'Name - ' + this.options.gender,
+               lastName);
+        },
 
         share: function(e) {
              var share_url = "http://whatthefuckshouldinamemychild.com/?utm_source=facebook&utm_medium=share&utm_campaign=ithink#"
